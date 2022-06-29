@@ -16,67 +16,96 @@ numberBtn.forEach((e) => {
     });
 });
 
-deleteBtn.addEventListener('click', () => deleteNumber());
+deleteBtn.addEventListener('click', () => deleteNumber(liveNum));
 
-clearBtn.addEventListener('click', () => clearNumber());
+clearBtn.addEventListener('click', () => clearAll());
 
 operandBtn.forEach((e) => {
     e.addEventListener('click', () => {
-        moveHistory(liveNum);
-        clearNumber();
-        operand = e.innerHTML;
+        operate(e.innerHTML);
     });
 });
 
 enterBtn.addEventListener('click', () => result(liveNum, historyNum, operand));
 
 function addNumber(input) {
-    liveNum = liveNum + input;
+    liveNum = liveNum + "" + input;
     liveInput.innerHTML = liveNum;
+    liveNum = parseInt(liveNum);
     return liveNum;
 };
 
-function deleteNumber() {
-    const del = liveNum.slice(0, -1);
-    liveInput.innerHTML = del;
-    liveNum = del
+function deleteNumber(d = liveNum) {
+    let dLen = d.toString().length;
+    if (dLen > 1) {
+        const del = d.toString().slice(0, -1);
+        liveInput.innerHTML = del;
+        liveNum = parseInt(del);
+        dLen -= 1;
+        return dLen;
+    } else {
+        liveNum = "";
+        liveInput.innerHTML = liveNum;
+        return dLen;
+    }
+}
+
+function clearLive() {
+    liveNum = "";
+    liveInput.innerHTML = liveNum;
     return liveNum;
 }
 
-function clearNumber() {
-    liveNum = "";
+function clearHistory() {
     historyNum = "";
-    liveInput.innerHTML = liveNum;
-    historyInput.innerHTML = historyNum
-    return liveNum;
+    historyInput.innerHTML = historyNum;
+    return historyNum;
+}
+
+function clearAll() {
+    clearLive();
+    clearHistory();
 }
 
 function moveHistory(liveNum) {
     historyNum = liveNum;
     historyInput.innerHTML = historyNum;
+    clearLive();
     return historyNum;
 }
 
-function result(liveNum, historyNum, operand) {
+function operate(calc) {
+    operand = calc;
+    if (historyNum == "") {
+        moveHistory(liveNum);
+    } else {
+        result(liveNum, historyNum, operand)
+    }
+    return operand;
+}
+
+function result(a = liveNum, b = historyNum, o = operand) {
     let res = 0;
-    switch(operand) {
+    switch (o) {
         case "+":
-            res = parseFloat(liveNum) + parseFloat(historyNum);
+            res = parseFloat(historyNum) + parseFloat(liveNum);
             break;
         case "-":
-            res = parseFloat(liveNum) - parseFloat(historyNum);
+            res = parseFloat(historyNum) - parseFloat(liveNum);
             break;
         case "*":
-            res = parseFloat(liveNum) * parseFloat(historyNum);
+            res = parseFloat(historyNum) * parseFloat(liveNum);
             break;
         case "/":
-            res = parseFloat(liveNum) / parseFloat(historyNum);
+            res = parseFloat(historyNum) / parseFloat(liveNum);
             break;
         default:
             res = "Incorrect value";
             break;
     }
-    clearNumber();
-    liveInput.innerHTML = res;
+    clearLive();
+    historyNum = res;
+    historyInput.innerHTML = res;
+
     return res;
 }
