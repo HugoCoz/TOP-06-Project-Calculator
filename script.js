@@ -5,6 +5,7 @@ let operand = "";
 const liveInput = document.querySelector('.live');
 const historyInput = document.querySelector('.history');
 const numberBtn = document.querySelectorAll('div.inputs > div.number');
+const pointBtn = document.querySelector('div.float');
 const deleteBtn = document.querySelector('div.delete');
 const clearBtn = document.querySelector('div.clear');
 const operandBtn = document.querySelectorAll('div.inputs > div.operand');
@@ -12,9 +13,11 @@ const enterBtn = document.querySelector('.enter');
 
 numberBtn.forEach((e) => {
     e.addEventListener('click', () => {
-        addNumber(parseInt(e.innerHTML));
+        addNumber(parseFloat(e.innerHTML));
     });
 });
+
+pointBtn.addEventListener('click', () => addNumber("."));
 
 deleteBtn.addEventListener('click', () => deleteNumber(liveNum));
 
@@ -29,10 +32,16 @@ operandBtn.forEach((e) => {
 enterBtn.addEventListener('click', () => result(liveNum, historyNum, operand));
 
 function addNumber(input) {
-    liveNum = liveNum + "" + input;
-    liveInput.innerHTML = liveNum;
-    liveNum = parseInt(liveNum);
-    return liveNum;
+    let aLen = liveNum.toString().length;
+    if (aLen >= 5) {
+        liveInput.innerHTML = liveNum;
+        return liveNum;
+    } else {
+        liveNum = liveNum + "" + input;
+        liveInput.innerHTML = liveNum;
+        liveNum = parseFloat(liveNum);
+        return liveNum;
+    }
 };
 
 function deleteNumber(d = liveNum) {
@@ -40,7 +49,7 @@ function deleteNumber(d = liveNum) {
     if (dLen > 1) {
         const del = d.toString().slice(0, -1);
         liveInput.innerHTML = del;
-        liveNum = parseInt(del);
+        liveNum = parseFloat(del);
         dLen -= 1;
         return dLen;
     } else {
@@ -67,7 +76,7 @@ function clearAll() {
     clearHistory();
 }
 
-function moveHistory(liveNum) {
+function moveHistory(mv = liveNum) {
     historyNum = liveNum;
     historyInput.innerHTML = historyNum;
     clearLive();
@@ -84,28 +93,33 @@ function operate(calc) {
     return operand;
 }
 
-function result(a = liveNum, b = historyNum, o = operand) {
+function result(liveNum, historyNum, operand) {
     let res = 0;
-    switch (o) {
-        case "+":
-            res = parseFloat(historyNum) + parseFloat(liveNum);
-            break;
-        case "-":
-            res = parseFloat(historyNum) - parseFloat(liveNum);
-            break;
-        case "*":
-            res = parseFloat(historyNum) * parseFloat(liveNum);
-            break;
-        case "/":
-            res = parseFloat(historyNum) / parseFloat(liveNum);
-            break;
-        default:
-            res = "Incorrect value";
-            break;
+
+    if (historyNum == "") {
+        moveHistory(liveNum);
+    } else {
+        switch (operand) {
+            case "+":
+                res = parseFloat(historyNum) + parseFloat(liveNum);
+                break;
+            case "-":
+                res = parseFloat(historyNum) - parseFloat(liveNum);
+                break;
+            case "*":
+                res = parseFloat(historyNum) * parseFloat(liveNum);
+                break;
+            case "/":
+                res = parseFloat(historyNum) / parseFloat(liveNum);
+                break;
+            default:
+                res = "Incorrect value";
+                break;
+        }
+        historyNum = res;
+        historyInput.innerHTML = res;
     }
     clearLive();
-    historyNum = res;
-    historyInput.innerHTML = res;
 
-    return res;
+    return historyNum;
 }
