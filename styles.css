@@ -4,7 +4,16 @@ body {
     margin: 0 auto;
     text-align: center;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 2px;
+    background-color: #E7E7E8;
+}
+
+h1 {
+    color: #22252D;
+    text-transform: uppercase;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .calculator {
@@ -14,19 +23,18 @@ body {
     margin: 0 auto;
     margin-top: 25px;
     border-radius: 10px;
-    background-color: rgb(255, 224, 232);
+    background-color: #22252D;
 }
 
 .screen {
     max-width: 420px;
     height: 20vh;
-    border: 1px solid black;
     margin: 0 auto;
     margin-top: 20px;
     border-radius: 10px;
     display: grid;
     grid-template-rows: 35% 65%;
-    background-color: white;
+    background-color: #292D36;
 }
 
 div.live {
@@ -46,37 +54,39 @@ div.history {
 .inputs {
     max-width: 420px;
     height: 40vh;
-    border: 1px solid black;
     margin: 0 auto;
     margin-top: 10px;
     border-radius: 10px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    background-color: white;
+    background-color: #292D36;
 }
 
 .inputs div {
     margin: 5px;
-    border: 1px solid black;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #22252D;
 }
 
-.empty {
-    background-color: lightgray;
+.number {
+    color: #26AD97;
+    font-size: 20px;
 }
 
-.enter {
-    background-color: lightblue;
+.operand {
+    color: #EF7979;
+    font-size: 20px;
 }
 
-.clear {
-    background-color: lightcoral;
+.enter, .clear, .delete {
+    font-size: 12px;
+    letter-spacing: 1px;
 }
 
-.delete {
-    background-color: lightpink;
+footer {
+    color: #22252D;
 }
