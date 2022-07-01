@@ -82,7 +82,7 @@ div.history {
     font-size: 20px;
 }
 
-.enter, .clear, .delete {
+.enter, .clear, .delete, .minus {
     font-size: 12px;
     letter-spacing: 1px;
 }

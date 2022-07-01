@@ -8,6 +8,7 @@ const liveInput = document.querySelector('.live');
 const historyInput = document.querySelector('.history');
 const numberBtn = document.querySelectorAll('div.inputs > div.number');
 const pointBtn = document.querySelector('div.float');
+const minusBtn = document.querySelector('.minus');
 const deleteBtn = document.querySelector('div.delete');
 const clearBtn = document.querySelector('div.clear');
 const operandBtn = document.querySelectorAll('div.inputs > div.operand');
@@ -27,6 +28,8 @@ pointBtn.addEventListener('click', () => {
         addNumber(".");
     };
 });
+
+minusBtn.addEventListener('click', () => addMinus());
 
 deleteBtn.addEventListener('click', () => deleteNumber(liveNum));
 
@@ -57,6 +60,8 @@ window.addEventListener('keydown', (e) => {
         deleteNumber(liveNum);
     } else if (keyType.classList.value == "clear") {
         clearAll();
+    } else if (keyType.classList.value == "minus") {
+        addMinus();
     } else {
         result(liveNum, historyNum, operand);
     }
@@ -90,6 +95,18 @@ function deleteNumber(d = liveNum) {
         liveInput.innerHTML = liveNum;
         return dLen;
     }
+}
+
+function addMinus() {
+    if(liveNum[0] != "-") {
+        liveNum = "-" + liveNum;
+        liveInput.innerHTML = liveNum;
+    } else {
+        liveNum = liveNum.replace("-", "");
+        liveInput.innerHTML = liveNum;
+    }
+    
+    return liveNum;
 }
 
 // Clear the calculator
