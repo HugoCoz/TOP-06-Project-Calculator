@@ -39,7 +39,6 @@ function addNumber(input) {
     } else {
         liveNum = liveNum + "" + input;
         liveInput.innerHTML = liveNum;
-        liveNum = parseFloat(liveNum);
         return liveNum;
     }
 };
