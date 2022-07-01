@@ -17,9 +17,8 @@ max decimals
 fix operation with several values
 fix possibility to continue operation after "enter"
 fix problem while pressing enter enter more than one time ("NaN")
+possibility to operate with float
 
 TO DO :
 keyboard listeners
-check possibles problems
-float decimals (max 2)
 UI
