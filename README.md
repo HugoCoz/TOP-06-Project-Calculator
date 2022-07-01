@@ -1,7 +1,4 @@
 # TOP-06-Project-Calculator
-Don’t forget to commit early & often! You can reference the Commit Message lesson here!
-
-
 DONE : 
 add
 subtract
@@ -18,7 +15,11 @@ fix operation with several values
 fix possibility to continue operation after "enter"
 fix problem while pressing enter enter more than one time ("NaN")
 possibility to operate with float
+keyboard listeners
+need to fix error when pressing "enter" when history area not null but live area nul
+need to fix the float ('.') with keyboard listener
+restric to max float of 2 numbers
 
 TO DO :
-keyboard listeners
+fix possibility to put multiple float in live area
 UI
