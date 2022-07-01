@@ -14,10 +14,12 @@ storing variables
 enter button
 delete button
 max decimals
+fix operation with several values
+fix possibility to continue operation after "enter"
+fix problem while pressing enter enter more than one time ("NaN")
 
 TO DO :
 keyboard listeners
-fix operation with several values
 check possibles problems
 float decimals (max 2)
 UI

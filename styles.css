@@ -14,7 +14,7 @@ body {
     margin: 0 auto;
     margin-top: 25px;
     border-radius: 10px;
-    background-color: lightcyan;
+    background-color: rgb(255, 224, 232);
 }
 
 .screen {
@@ -36,6 +36,11 @@ div.live {
     align-items: flex-end;
     justify-content: end;
     padding: 10px;   
+}
+
+div.history {
+    font-size: 28px;
+    font-weight: 600;
 }
 
 .inputs {

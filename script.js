@@ -76,7 +76,7 @@ function clearAll() {
     clearHistory();
 }
 
-function moveHistory(mv = liveNum) {
+function moveHistory() {
     historyNum = liveNum;
     historyInput.innerHTML = historyNum;
     clearLive();
@@ -84,33 +84,38 @@ function moveHistory(mv = liveNum) {
 }
 
 function operate(calc) {
-    operand = calc;
     if (historyNum == "") {
         moveHistory(liveNum);
+        operand = calc;
+    } else if (liveNum == "") {
+        operand = calc;
     } else {
-        result(liveNum, historyNum, operand)
+        result(liveNum, historyNum, operand);
+        operand = calc
     }
     return operand;
 }
 
-function result(liveNum, historyNum, operand) {
-    let res = 0;
-
-    if (historyNum == "") {
-        moveHistory(liveNum);
+function result(a, b, o = operand) {
+    if (liveNum == "") {
+        return historyNum;
     } else {
-        switch (operand) {
+        let res = 0;
+        a = parseFloat(liveInput.innerHTML);
+        b = parseFloat(historyInput.innerHTML);
+
+        switch (o) {
             case "+":
-                res = parseFloat(historyNum) + parseFloat(liveNum);
+                res = parseFloat(b) + parseFloat(a);
                 break;
             case "-":
-                res = parseFloat(historyNum) - parseFloat(liveNum);
+                res = parseFloat(b) - parseFloat(a);
                 break;
             case "*":
-                res = parseFloat(historyNum) * parseFloat(liveNum);
+                res = parseFloat(b) * parseFloat(a);
                 break;
             case "/":
-                res = parseFloat(historyNum) / parseFloat(liveNum);
+                res = parseFloat(b) / parseFloat(a);
                 break;
             default:
                 res = "Incorrect value";
@@ -118,8 +123,9 @@ function result(liveNum, historyNum, operand) {
         }
         historyNum = res;
         historyInput.innerHTML = res;
-    }
-    clearLive();
 
-    return historyNum;
+        clearLive();
+
+        return historyNum;
+    }
 }
