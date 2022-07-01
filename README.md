@@ -19,7 +19,7 @@ keyboard listeners
 need to fix error when pressing "enter" when history area not null but live area nul
 need to fix the float ('.') with keyboard listener
 restric to max float of 2 numbers
+fix possibility to put multiple float in live area
 
 TO DO :
-fix possibility to put multiple float in live area
 UI

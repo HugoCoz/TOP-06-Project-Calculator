@@ -20,7 +20,13 @@ numberBtn.forEach((e) => {
     });
 });
 
-pointBtn.addEventListener('click', () => addNumber("."));
+pointBtn.addEventListener('click', () => {
+    if (liveNum.includes(".")) {
+        return liveNum;
+    } else {
+        addNumber(".");
+    };
+});
 
 deleteBtn.addEventListener('click', () => deleteNumber(liveNum));
 
@@ -37,10 +43,14 @@ enterBtn.addEventListener('click', () => result(liveNum, historyNum, operand));
 // Keyboard events listeners
 window.addEventListener('keydown', (e) => {
     const keyType = document.querySelector(`.inputs > div[data-key="${e.key}"]`);
-    if ((keyType.classList.value == "number") || (keyType.classList.value == "float")) {
+    if (keyType.classList.value == "number") {
         addNumber(keyType.innerHTML);
     } else if (keyType.classList.value == "float") {
-        addNumber(".");
+        if (liveNum.includes(".")) {
+            return liveNum;
+        } else {
+            addNumber(".");
+        };
     } else if (keyType.classList.value == "operand") {
         operate(keyType.innerHTML);
     } else if (keyType.classList.value == "delete") {
@@ -124,7 +134,7 @@ function operate(calc) {
     return operand;
 }
 
- // Main operation
+// Main operation
 function result(a, b, o = operand) {
     if (liveNum == "" || historyNum == "") {
         return historyNum;
