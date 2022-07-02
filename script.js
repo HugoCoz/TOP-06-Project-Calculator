@@ -7,6 +7,7 @@ let operand = "";
 const liveInput = document.querySelector('.live');
 const historyInput = document.querySelector('.history');
 const numberBtn = document.querySelectorAll('div.inputs > div.number');
+const LiveOperator = document.querySelector('.liveOperator');
 const pointBtn = document.querySelector('div.float');
 const minusBtn = document.querySelector('.minus');
 const deleteBtn = document.querySelector('div.delete');
@@ -37,6 +38,7 @@ clearBtn.addEventListener('click', () => clearAll());
 
 operandBtn.forEach((e) => {
     e.addEventListener('click', () => {
+        showOperand(e.innerHTML);
         operate(e.innerHTML);
     });
 });
@@ -55,6 +57,7 @@ window.addEventListener('keydown', (e) => {
             addNumber(".");
         };
     } else if (keyType.classList.value == "operand") {
+        showOperand(keyType.innerHTML);
         operate(keyType.innerHTML);
     } else if (keyType.classList.value == "delete") {
         deleteNumber(liveNum);
@@ -97,6 +100,7 @@ function deleteNumber(d = liveNum) {
     }
 }
 
+// Add the possibility to switch actual live number to minus or positive
 function addMinus() {
     if(liveNum[0] != "-") {
         liveNum = "-" + liveNum;
@@ -107,7 +111,13 @@ function addMinus() {
     }
     
     return liveNum;
-}
+};
+
+// Show the actual operand in the calculator screen
+function showOperand(sign) {
+    LiveOperator.innerHTML = sign;
+    return sign;
+};
 
 // Clear the calculator
 function clearLive() {
@@ -119,7 +129,9 @@ function clearLive() {
 // Clear the history area of the calculator
 function clearHistory() {
     historyNum = "";
+    operand = "";
     historyInput.innerHTML = historyNum;
+    LiveOperator.innerHTML = operand;
     return historyNum;
 }
 
@@ -167,7 +179,7 @@ function result(a, b, o = operand) {
             case "-":
                 res = b - a;
                 break;
-            case "*":
+            case "x":
                 res = b * a;
                 break;
             case "/":
@@ -182,6 +194,7 @@ function result(a, b, o = operand) {
         historyInput.innerHTML = res;
 
         clearLive();
+        showOperand("");
 
         return historyNum;
     }
